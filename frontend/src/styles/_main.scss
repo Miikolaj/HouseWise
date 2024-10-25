@@ -1,0 +1,48 @@
+@import 'scss-reset/total-reset';
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
+$font-primary: 'Montserrat';
+
+$background: #010104;
+$font-color: #EBE9FC;
+$primary: #0048D9;
+$secondary: #020024;
+$accent: #0600C2;
+
+:global(body) {
+  font-family: $font-primary;
+  color: $font-color;
+  background: $background;
+  margin: 0;
+}
+
+:global(html) {
+  scroll-behavior: smooth;
+}
+
+:global(html) {
+  font-size: 16px;
+}
+
+:global(::-webkit-scrollbar) {
+  width: 3px;
+}
+
+:global(::-webkit-scrollbar-thumb) {
+  background: darken($accent, 10%);
+  width: 10px;
+}
+
+/* Ipad */
+@media (max-width: 992px) {
+  :global(html) {
+    font-size: 14px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  :global(html) {
+    font-size: 10px;
+  }
+}
