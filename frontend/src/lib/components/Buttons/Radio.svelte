@@ -1,21 +1,21 @@
 <script lang="ts">
-	export let value = false;
-	export let title: string = 'Place Holder';
+    export let value = false;
+    export let title: string = 'Place Holder';
 
-	function toggle() {
-		value = !value;
-	}
+    function toggle() {
+        value = !value;
+    }
 </script>
 
-<div class="wrapper">
-	<button class="radio-button" type="button" on:click={toggle} aria-pressed={value}>
-		{#if value}
-			<div class="dot"></div>
-		{/if}
-	</button>
-	<div class="title">
-		{title}
-	</div>
+<div class="dropdown-component">
+    <button class="radio-button" type="button" on:click={toggle} aria-pressed={value}>
+        {#if value}
+            <div class="dot"></div>
+        {/if}
+    </button>
+    <div class="title">
+        {title}
+    </div>
 </div>
 
 <style lang="scss">
@@ -40,9 +40,10 @@
     border-radius: 50%;
   }
 
-	.wrapper{
-		display: flex;
+  .dropdown-component {
+    display: flex;
     align-items: center;
-		gap: 10px;
-	}
+    gap: 10px;
+    padding: 12px 0;
+  }
 </style>

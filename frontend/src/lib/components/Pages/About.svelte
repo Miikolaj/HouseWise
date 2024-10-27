@@ -20,15 +20,15 @@
 	</div>
 
 	<div class="right-section">
-		<div class="wrapper">
+		<div class="dropdown-component">
 			<div class="stat">250.000+</div>
 			<div class="text">Trusted Homebuyers and Sellers</div>
 		</div>
-		<div class="wrapper">
+		<div class="dropdown-component">
 			<div class="stat">15,000+</div>
 			<div class="text">Hours Saved in Market Research</div>
 		</div>
-		<div class="wrapper">
+		<div class="dropdown-component">
 			<div class="stat">90%</div>
 			<div class="text">Satisfied Users</div>
 		</div>

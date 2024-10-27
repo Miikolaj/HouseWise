@@ -33,14 +33,12 @@ $accent: #0600C2;
   width: 10px;
 }
 
-/* Ipad */
 @media (max-width: 992px) {
   :global(html) {
     font-size: 14px;
   }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
   :global(html) {
     font-size: 10px;

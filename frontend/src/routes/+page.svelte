@@ -1,11 +1,12 @@
 <script lang="ts">
-	import { About, Main, Program } from '$components';
+    import {About, Main, Program} from '$components';
 
 </script>
 
-<div class="wrapper">
-	<Main/>
-	<About/>
+<div class="dropdown-component">
+    <Main/>
+    <Program/>
+    <About/>
 </div>
 
 <style lang="scss">
