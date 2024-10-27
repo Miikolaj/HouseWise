@@ -39,7 +39,7 @@
     position: fixed;
     width: 100%;
     transition: background-color 0.3s ease-in-out;
-    z-index: 9999;
+    z-index: 10;
     background-color: transparent;
 
     &.scrolled {
@@ -72,5 +72,15 @@
     justify-content: flex-end;
   }
 
+  @media (max-width: 740px){
+	  .header-content {
+		  padding: 15px 40px;
+	  }
+  }
 
+  @media (max-width: 580px) {
+	  .links {
+		  display: none;
+	  }
+  }
 </style>

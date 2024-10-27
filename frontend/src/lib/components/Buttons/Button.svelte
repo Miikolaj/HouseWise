@@ -38,17 +38,21 @@
     &:focus {
       outline: none;
     }
+
+    @media (max-width: 580px) {
+      padding: 10px 24px;
+    }
   }
 
   .form {
-
     padding: 15px 120px;
     background: $primary;
     border-radius: 4px;
     box-shadow: 0 0 25px 10px rgba(58, 49, 216, 0.50);
     transition: background 0.3s ease, box-shadow 0.3s ease;
     justify-self: center;
-
+    font-size: 1.125rem;
+    font-weight: 600;
     &:hover {
       background: lighten($primary, 10%);
       box-shadow: 0 0 25px 10px rgba(66, 32, 133, 0.6);
@@ -56,6 +60,10 @@
 
     &:focus {
       outline: none;
+    }
+
+    @media (max-width: 580px) {
+      padding: 10px 48px;
     }
   }
 </style>

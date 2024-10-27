@@ -10,5 +10,13 @@
 </div>
 
 <style lang="scss">
+    .dropdown-component {
+      display: grid;
+    }
 
+    @media (max-height: 464px) {
+      .dropdown-component {
+        gap: 70px;
+      }
+    }
 </style>

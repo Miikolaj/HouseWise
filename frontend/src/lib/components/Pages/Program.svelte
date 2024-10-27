@@ -111,4 +111,16 @@
   .radio-wrapper {
     gap: 5px;
   }
+
+  @media (max-width: 580px) {
+    .program-component .form-header {
+      font-size: 2rem !important;
+    }
+
+    .program-component .form-description {
+      font-size: 1rem !important;
+    }
+
+
+  }
 </style>

@@ -43,4 +43,14 @@
     font-size: 1.125rem;
     font-weight: 200;
   }
+
+  @media (max-width: 580px) {
+	  .title {
+		  font-size: 2rem !important;
+	  }
+
+	 .slogan {
+		  font-size: 1rem !important;
+	  }
+  }
 </style>

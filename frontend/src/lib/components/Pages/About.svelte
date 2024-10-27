@@ -3,36 +3,40 @@
 </script>
 
 <div id="about" class="about-section">
-	<div class="left-section">
-		<div class="header">How it works?</div>
-		<div class="text">The HouseWise estimator predicts house prices using a <span>machine learning model</span> trained on
-			property data such as area, number of bedrooms, bathrooms, floors, year built, location, condition, garage, and
-			price.
-		</div>
-		<div class="text">The model relies on Gradient Boosting algorithms like <span>XGBoost</span> or <span>LightGBM</span>. These algorithms
-			build decision trees that refine price predictions by learning patterns from historical data, such as the
-			influence of location or house size.
-		</div>
-		<div class="text">When users input details about a house, the estimator analyzes the data and predicts the
-			price based on learned relationships between features. The result is a <span>reliable estimate</span> of the house’s value,
-			helping users make informed decisions in the real estate market.
-		</div>
-	</div>
+    <div class="left-section">
+        <div class="header">How it works?</div>
+        <div class="text">The HouseWise estimator predicts house prices using a <span>machine learning model</span>
+            trained on
+            property data such as area, number of bedrooms, bathrooms, floors, year built, location, condition, garage,
+            and
+            price.
+        </div>
+        <div class="text">The model relies on Gradient Boosting algorithms like <span>XGBoost</span> or
+            <span>LightGBM</span>. These algorithms
+            build decision trees that refine price predictions by learning patterns from historical data, such as the
+            influence of location or house size.
+        </div>
+        <div class="text">When users input details about a house, the estimator analyzes the data and predicts the
+            price based on learned relationships between features. The result is a <span>reliable estimate</span> of the
+            house’s value,
+            helping users make informed decisions in the real estate market.
+        </div>
+    </div>
 
-	<div class="right-section">
-		<div class="dropdown-component">
-			<div class="stat">250.000+</div>
-			<div class="text">Trusted Homebuyers and Sellers</div>
-		</div>
-		<div class="dropdown-component">
-			<div class="stat">15,000+</div>
-			<div class="text">Hours Saved in Market Research</div>
-		</div>
-		<div class="dropdown-component">
-			<div class="stat">90%</div>
-			<div class="text">Satisfied Users</div>
-		</div>
-	</div>
+    <div class="right-section">
+        <div class="dropdown-component">
+            <div class="stat">250.000+</div>
+            <div class="text">Trusted Homebuyers and Sellers</div>
+        </div>
+        <div class="dropdown-component">
+            <div class="stat">15,000+</div>
+            <div class="text">Hours Saved in Market Research</div>
+        </div>
+        <div class="dropdown-component">
+            <div class="stat">90%</div>
+            <div class="text">Satisfied Users</div>
+        </div>
+    </div>
 </div>
 
 <style lang="scss">
@@ -82,17 +86,17 @@
     font-weight: 600;
   }
 
-	@media (max-width: 1180px) {
+  @media (max-width: 1180px) {
     .about-section {
       grid-template-columns: 1fr;
-			padding: 20px 20px;
-			gap: 20px;
+      padding: 20px 20px;
+      gap: 20px;
     }
-	}
+  }
 
   @media (max-width: 992px) {
     .header {
-   		font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
 </style>
