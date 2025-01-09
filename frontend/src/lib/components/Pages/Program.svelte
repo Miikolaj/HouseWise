@@ -2,14 +2,14 @@
     import {Input, Button, Radio, Dropdown} from '$components';
     import {PriceRepository} from "$lib/repositories/price.repository";
 
-    let radioValue = false;
-    let condition = '';
-    let location = '';
-    let area = '';
-    let bedrooms = '';
-    let bathrooms = '';
-    let floors = '';
-    let yearOfBuilt = '';
+    let area: string = "";
+    let bedrooms: string = "";
+    let bathrooms: string = "";
+    let floors: string = "";
+    let condition: string = "";
+    let location: string = "";
+    let yearOfBuilt: string = "";
+    let radioValue: boolean = false;
     let price: string = '0';
 
 
@@ -41,8 +41,26 @@
         }
 
         try {
-            price = await priceRepository.getPrice(area, bedrooms, bathrooms, floors, condition, location, yearOfBuilt, radioValue);
-        } catch (error) {
+
+            const response = await fetch("http://127.0.0.1:8000/predict", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                   /*
+                   wypełnić nazwami zmiennych po przecinku muszą się pokrywać z nazwami w klasie Item na backedzie
+                    var1,
+                    var2,
+                    var3
+                    */
+                })
+            });
+
+            const data = await response.json();
+            price = data.price;
+        }
+        catch (error) {
             console.error('Error fetching price:', error);
         }
     }
