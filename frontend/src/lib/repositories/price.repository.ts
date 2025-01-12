@@ -1,9 +1,31 @@
 import apiClient from '$lib/config/axios.config';
 
 export class PriceRepository {
-    async getPrice(area: string, bedrooms: string, bathrooms: string, floors: string, condition: string, location: string, year: string, garage: boolean) :Promise<unknown> {
+    async getPrice(
+        quality: string,
+        garageSize: string,
+        exteriorQuality: string,
+        livingArea: string,
+        bathrooms: string,
+        kitchenQuality: string,
+        yearBuilt: string,
+        firstFloorArea: string,
+        basementQuality: string,
+        fireplace: string
+    ): Promise<string> {
         return new Promise((resolve, reject) => {
-            apiClient.post('/price', {area, bedrooms, bathrooms, floors, condition, location, year, garage})
+            apiClient.post('/predict', {
+                OverallQual: quality,
+                GarageCars: garageSize,
+                ExterQual: exteriorQuality,
+                GrLivArea: livingArea,
+                FullBath: bathrooms,
+                KitchenQual: kitchenQuality,
+                YearBuilt: yearBuilt,
+                FirstFlrSF: firstFloorArea,
+                BsmtQual: basementQuality,
+                Fireplaces: fireplace,
+            })
                 .then(response => {
                     resolve(response.data.price);
                 })

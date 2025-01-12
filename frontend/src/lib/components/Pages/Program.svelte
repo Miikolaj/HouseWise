@@ -1,17 +1,18 @@
 <script lang="ts">
-    import {Input, Button, Radio, Dropdown} from '$components';
+    import {Button, Dropdown, Input} from '$components';
     import {PriceRepository} from "$lib/repositories/price.repository";
 
-    let area: string = "";
-    let bedrooms: string = "";
-    let bathrooms: string = "";
-    let floors: string = "";
-    let condition: string = "";
-    let location: string = "";
-    let yearOfBuilt: string = "";
-    let radioValue: boolean = false;
     let price: string = '0';
-
+    let OverallQual: string = '';
+    let GarageCars: string = '';
+    let ExterQual: string = '';
+    let GrLivArea: string = '';
+    let FullBath: string = '';
+    let KitchenQual: string = '';
+    let YearBuilt: string = '';
+    let FirstFlrSF: string = '';
+    let BsmtQual: string = '';
+    let Fireplaces: string = '';
 
     const priceRepository = new PriceRepository();
 
@@ -36,60 +37,66 @@
     };
 
     const submitForm = async () => {
-        if (validate(area) || validate(bedrooms) || validate(bathrooms) || validate(floors) || validateYear(yearOfBuilt)) {
+        if (validate(GarageCars) || validate(GrLivArea) || validate(FullBath) || validate(FirstFlrSF) || validateYear(YearBuilt) || validate(Fireplaces)) {
             return;
         }
 
         try {
-
-            const response = await fetch("http://127.0.0.1:8000/predict", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                   /*
-                   wypełnić nazwami zmiennych po przecinku muszą się pokrywać z nazwami w klasie Item na backedzie
-                    var1,
-                    var2,
-                    var3
-                    */
-                })
-            });
-
-            const data = await response.json();
-            price = data.price;
-        }
-        catch (error) {
+            price = await priceRepository.getPrice(
+                OverallQual,
+                GarageCars,
+                ExterQual,
+                GrLivArea,
+                FullBath,
+                KitchenQual,
+                YearBuilt,
+                FirstFlrSF,
+                BsmtQual,
+                Fireplaces
+            );
+            console.log('Predicted Price:', price);
+        } catch (error) {
             console.error('Error fetching price:', error);
         }
     }
 </script>
 
+/**
+* TODO: Add better validation and display error messages
+*/
+
 <div id="program" class="program-component">
     <div class="form-container">
         <div>
             <div class="form-header">
-                Your estimate: {price}zł
+                Your estimate: {price} zł
             </div>
             <div class="form-description">
                 Enter Your Property Details to Estimate Its Value
             </div>
         </div>
         <div class="form-wrapper">
-            <Input title="Area in square meters" placeholder="e.g., 120" bind:value={area} {validate}/>
-            <Input title="Bedrooms count" placeholder="e.g., 3" bind:value={bedrooms} {validate}/>
-            <Input title="Bathrooms count" placeholder="e.g., 2" bind:value={bathrooms} {validate}/>
-            <Input title="Amount of Floors" placeholder="e.g., 1" bind:value={floors} {validate}/>
-            <Dropdown title="Condition" options={['Excellent', 'Good', 'Fair', 'Poor']}
-                      bind:selectedOption={condition}/>
-            <Dropdown title="Location" options={['Downtown', 'Urban', 'Suburban', 'Rural']}
-                      bind:selectedOption={location}/>
-            <Input title="Year of Built" placeholder="e.g., 1995" bind:value={yearOfBuilt} validate={validateYear}/>
-            <div class="radio-wrapper">
-                <div>&zwnj;</div>
-                <Radio bind:value={radioValue} title="Has garage?"/>
-            </div>
+            <Dropdown title="Overall Quality"
+                      options={['Very Excellent', 'Excellent', 'Very Good', 'Good', 'Above Average', 'Average', 'Below Average', 'Fair', 'Poor', 'Very Poor']}
+                      bind:selectedOption={OverallQual}/>
+            <Input title="Car capacity in garage" placeholder="e.g. 2" bind:value={GarageCars}
+                   validate={validate}/>
+            <Dropdown title="External Quality" options={['Excellent', 'Good', 'Average/Typical', 'Fair', 'Poor']}
+                      bind:selectedOption={ExterQual}/>
+            <Input title="Above ground sq. ft." placeholder="e.g. 2400" bind:value={GrLivArea}
+                   validate={validate}/>
+            <Input title="Number of bathrooms" placeholder="e.g. 1" bind:value={FullBath}
+                   validate={validate}/>
+            <Dropdown title="Kitchen quality" options={['Excellent', 'Good', 'Average/Typical', 'Fair', 'Poor']}
+                      bind:selectedOption={KitchenQual}/>
+            <Input title="Year the House Was Built" placeholder="e.g. 2002" bind:value={YearBuilt}
+                   validate={validateYear}/>
+            <Input title="First Floor square feet" placeholder="e.g. 4000" bind:value={FirstFlrSF}
+                   validate={validate}/>
+            <Dropdown title="Basement quality" options={['Excellent', 'Good', 'Typical', 'Fair', 'Poor','No Basement']}
+                      bind:selectedOption={BsmtQual}/>
+            <Input title="Number of fireplaces" placeholder="e.g. 1" bind:value={Fireplaces}
+                   validate={validate}/>
         </div>
         <Button type="form" on:click={submitForm}>Submit</Button>
     </div>
@@ -124,10 +131,6 @@
     grid-template-columns: 1fr 1fr;
     gap: 0 20px;
     max-width: 500px;
-  }
-
-  .radio-wrapper {
-    gap: 5px;
   }
 
   @media (max-width: 580px) {
