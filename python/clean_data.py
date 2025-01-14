@@ -1,6 +1,6 @@
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.impute import SimpleImputer
-from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import LabelEncoder, OneHotEncoder
 import pandas as pd
 
 file_path = '../data/train.csv'
@@ -23,15 +23,12 @@ for col in X_encoded.select_dtypes(include='object').columns:
 model = RandomForestRegressor(random_state=42)
 model.fit(X_encoded, y)
 
-importances = pd.Series(model.feature_importances_, index=X.columns)
-top_10_features = importances.nlargest(10).index
+features_importance = pd.Series(model.feature_importances_, index=X.columns)
+top_10_features = features_importance.nlargest(10)
+top_10_features = pd.Series(top_10_features)
 
-cleaned_data = data[top_10_features.tolist() + [target]]
+cleaned_data = data[top_10_features.index.tolist() + [target]]
 
-print("\nColumns with Missing Values:")
-print(cleaned_data.isnull().sum())
-cleaned_data=cleaned_data.dropna()
-
-cleaned_data.to_csv("cleaned_dataset.csv", index=False)
+cleaned_data.to_csv("../data/cleaned_dataset.csv", index=False)
 
 print("Dataset cleaned")
