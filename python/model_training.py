@@ -41,31 +41,31 @@ preprocessor = ColumnTransformer(
 )
 
 # Create a pipeline with the preprocessor and model
-model_pipeline = Pipeline(steps=[
+model = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('model', RandomForestRegressor())
+    ('model', RandomForestRegressor(random_state=42))
 ])
 
 # Split data into train and test sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=0)
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
 # Fit the pipeline on training data
-model_pipeline.fit(X_train, y_train)
+model.fit(X_train, y_train)
+y_pred = model.predict(X_test)
 
 # Save the pipeline to a file
-output_path = 'C:/Users/mkowa/WebstormProjects/HouseWise/backend/fastApiProject/'
+output_path = '../backend/fastApiProject/'
 os.makedirs(output_path, exist_ok=True)
 model_file = os.path.join(output_path, 'model.pkl')
 
 with open(model_file, 'wb') as f:
-    pickle.dump(model_pipeline, f)
+    pickle.dump(model, f)
 
-print("Number of features expected:", model_pipeline.n_features_in_)
+print("Number of features expected:", model.n_features_in_)
 
 print("Pipeline saved to:", model_file)
 
 # Evaluate the model
-y_pred = model_pipeline.predict(X_test)
 mae = mean_absolute_error(y_test, y_pred)
 mse = mean_squared_error(y_test, y_pred)
 rmse = np.sqrt(mse)
