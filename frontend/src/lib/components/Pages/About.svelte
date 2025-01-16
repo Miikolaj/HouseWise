@@ -11,10 +11,10 @@
             and
             price.
         </div>
-        <div class="text">The model relies on Gradient Boosting algorithms like <span>XGBoost</span> or
-            <span>LightGBM</span>. These algorithms
-            build decision trees that refine price predictions by learning patterns from historical data, such as the
-            influence of location or house size.
+        <div class="text">The model utilizes the<span>RandomForestRegressor</span>, machine learning algorithm
+            based on an ensemble of decision trees. The model works by constructing multiple decision trees during
+            training and combining their outputs to refine price predictions. Additionally it reduces the risk of overfitting
+            compared to a single decision tree.
         </div>
         <div class="text">When users input details about a house, the estimator analyzes the data and predicts the
             price based on learned relationships between features. The result is a <span>reliable estimate</span> of the
