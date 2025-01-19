@@ -1,7 +1,120 @@
-# SUML-Projekt-koncowy
+# HouseWise Estimator
 
-To start project run in terminal: ```.\start-project.ps1```
+HouseWise Estimator is a web application that predicts house prices using a machine learning model trained on property data. The model utilizes the `RandomForestRegressor` algorithm to provide reliable estimates of house values, helping users make informed decisions in the real estate market.
 
-Backend running on ```http://127.0.0.1:8000```
+## Features
 
-Frontend running on ```http://localhost:5173```
+- Predict house prices based on various property features
+- User-friendly interface for inputting property details
+- Real-time predictions using a FastAPI backend
+- Responsive design for different screen sizes
+
+## Technologies Used
+
+- Python
+- FastAPI
+- Scikit-learn
+- Pandas
+- Svelte
+- TypeScript
+- SCSS
+
+## Installation
+1. Clone the repository:
+    ```sh
+    git clone https://github.com/Miikolaj/HouseWise.git
+    ```
+
+2. Create a virtual environment and activate it:
+    ```sh
+    python -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+## Start the Project
+
+To start the entire project, run the following command in your terminal:
+
+```sh
+./start-project.ps1
+```
+
+### Only Backend
+
+1. Install the required packages:
+    ```sh
+    pip install -r requirements.txt
+    ```
+
+2. Train the model and save the pipeline:
+    ```sh
+    python ../python/model_training.py
+    ```
+
+3. Start the FastAPI server:
+    ```sh
+    uvicorn main:app --reload
+    ```
+
+### Only Frontend
+
+1. Navigate to the frontend directory:
+    ```sh
+    cd ../../frontend
+    ```
+
+2. Install the required packages:
+    ```sh
+    npm install
+    ```
+
+3. Start the development server:
+    ```sh
+    npm run dev
+    ```
+
+## Usage
+
+1. Open your browser and navigate to `http://localhost:5173`.
+2. Input the details of the house you want to estimate the price for.
+3. Click the "Predict" button to get the estimated price.
+
+## Input Data Format
+
+The input data should include the following features:
+
+- `OverallQual`: Overall material and finish quality (e.g., "Very Excellent", "Excellent", "Very Good", etc.)
+- `GarageCars`: Number of cars that can fit in the garage
+- `ExterQual`: Exterior quality (e.g., "Excellent", "Good", "Average/Typical", etc.)
+- `GrLivArea`: Above ground living area in square feet
+- `FullBath`: Number of full bathrooms
+- `KitchenQual`: Kitchen quality (e.g., "Excellent", "Good", "Typical/Average", etc.)
+- `YearBuilt`: Year the house was built
+- `FirstFlrSF`: First floor square feet
+- `BsmtQual`: Basement quality (e.g., "Excellent", "Good", "Typical", etc.)
+- `Fireplaces`: Number of fireplaces
+
+## API Endpoints
+
+### `GET /`
+
+Returns a welcome message.
+
+### `POST /predict`
+
+Predicts the house price based on the input data.
+
+#### Request Body
+
+```json
+{
+  "OverallQual": "Very Good",
+  "GarageCars": "2",
+  "ExterQual": "Good",
+  "GrLivArea": "1500",
+  "FullBath": "2",
+  "KitchenQual": "Good",
+  "YearBuilt": "2000",
+  "FirstFlrSF": "1000",
+  "BsmtQual": "Good",
+  "Fireplaces": "1"
+}

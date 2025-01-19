@@ -1,5 +1,5 @@
-import numpy as np
 import pandas as pd
+import uvicorn
 from fastapi import FastAPI
 from pydantic import BaseModel
 from starlette.middleware.cors import CORSMiddleware
@@ -107,3 +107,7 @@ async def prediction(data: Item):
 
     # Return the prediction
     return {"price": str(prediction[0])}
+
+
+if __name__ == "__main__":
+    uvicorn.run("main:app", host="127.0.0.1", port=8000)

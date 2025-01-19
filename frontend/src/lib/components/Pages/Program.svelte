@@ -74,6 +74,8 @@
                     BsmtQual,
                     Fireplaces
                 );
+                const exchangeRate = 4.14;
+                price = (parseFloat(price) * exchangeRate).toFixed(2);
                 validButton = '';
             } catch (error) {
                 console.error('Error fetching price:', error);
@@ -120,11 +122,13 @@
             <Input title="Number of fireplaces" placeholder="e.g. 1" bind:value={Fireplaces}
                    validate={validate}/>
         </div>
-        <Button type="form" on:click={submitForm} disabled={loading}>
-            Submit
-        </Button>
-        <div class="error-wrapper">
-            {validButton || "\u00A0"}
+        <div>
+            <Button type="form" on:click={submitForm}>
+                Submit
+            </Button>
+            <div class="error-wrapper">
+                {validButton || "\u00A0"}
+            </div>
         </div>
     </div>
 </div>
@@ -162,6 +166,12 @@
     grid-template-columns: 1fr 1fr;
     gap: 0 20px;
     max-width: 500px;
+  }
+
+  .error-wrapper {
+    color: #FF4C4C;
+    font-size: 0.8rem;
+    padding:  7px 0;
   }
 
   @media (max-width: 580px) {
