@@ -6,7 +6,21 @@
     export let title: string = '-- None --';
     export let options: string[] = ['Excellent', 'Good', 'Fair', 'Poor'];
     export let selectedOption: string = '';
-    export let placeholder: string = options[0];
+    export let placeholder: string = '-- None --';
+
+    let selectClass = 'placeholder';
+
+    const handleChange = (event: Event) => {
+        const selectElement = event.target as HTMLSelectElement;
+        selectClass = selectElement.value ? 'selected' : 'placeholder';
+    };
+
+    export let validate: (value: string) => string;
+    let error = '';
+
+    const handleBlur = () => {
+        error = validate(selectedOption);
+    };
 </script>
 
 <div class="dropdown-component">
@@ -15,9 +29,11 @@
     </div>
     <div class="select-wrapper">
         <select
-                class="select-option"
+                class="select-option {selectClass}"
                 name={name}
                 bind:value={selectedOption}
+                on:change={handleChange}
+                on:blur={handleBlur}
         >
             <option value="" disabled selected hidden>
                 {placeholder}
@@ -31,19 +47,21 @@
             <Fa icon={faCaretDown} size="1x"/>
         </div>
     </div>
-    {"\u00A0"}
+    <div class="error-wrapper">
+        {error || "\u00A0"}
+    </div>
 </div>
 
 <style lang="scss">
   .dropdown-component {
     display: grid;
-    gap: 5px;
     width: 100%;
     text-align: left;
   }
 
   .title {
     font-weight: 500;
+    padding-bottom: 5px;
   }
 
   .select-wrapper {
@@ -58,6 +76,14 @@
     color: $font-color;
     border-radius: 4px;
     padding: 12px;
+
+    &.placeholder {
+      color: #ebe9fc80;
+    }
+
+    &.selected {
+      color: $font-color;
+    }
   }
 
   .icon-container {
@@ -67,5 +93,11 @@
     transform: translateY(-50%);
     pointer-events: none;
     color: lighten($accent, 10%);
+  }
+
+  .error-wrapper {
+    color: #FF4C4C;
+    font-size: 0.8rem;
+    padding:  7px 0;
   }
 </style>

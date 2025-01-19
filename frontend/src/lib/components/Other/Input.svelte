@@ -10,6 +10,7 @@
         value = target.value;
     };
     export let validate: (value: string) => string;
+
 </script>
 
 <div class="input-component">

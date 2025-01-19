@@ -53,7 +53,8 @@
     justify-self: center;
     font-size: 1.125rem;
     font-weight: 600;
-    &:hover {
+
+    &:hover:not(:disabled) {
       background: lighten($primary, 10%);
       box-shadow: 0 0 25px 10px rgba(66, 32, 133, 0.6);
     }

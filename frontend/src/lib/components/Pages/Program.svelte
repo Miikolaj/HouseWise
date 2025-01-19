@@ -15,6 +15,8 @@
     let Fireplaces: string = '';
 
     const priceRepository = new PriceRepository();
+    let validButton = '';
+    let loading = false;
 
     const validate = (value: string) => {
         let regex: RegExp = /^\d+$/;
@@ -36,36 +38,56 @@
         return '';
     };
 
+    const validateSelection = (value: string): string => {
+        if (!value.trim()) {
+            return 'Please select a valid option';
+        }
+        return '';
+    };
+
     const submitForm = async () => {
-        if (validate(GarageCars) || validate(GrLivArea) || validate(FullBath) || validate(FirstFlrSF) || validateYear(YearBuilt) || validate(Fireplaces)) {
-            return;
+        validButton = '';
+        loading = true;
+
+        if (!(
+            validate(GarageCars) ||
+            validate(GrLivArea) ||
+            validate(FullBath) ||
+            validate(FirstFlrSF) ||
+            validateYear(YearBuilt) ||
+            validate(Fireplaces) ||
+            validateSelection(OverallQual) ||
+            validateSelection(ExterQual) ||
+            validateSelection(KitchenQual) ||
+            validateSelection(BsmtQual)
+        )) {
+            try {
+                price = await priceRepository.getPrice(
+                    OverallQual,
+                    GarageCars,
+                    ExterQual,
+                    GrLivArea,
+                    FullBath,
+                    KitchenQual,
+                    YearBuilt,
+                    FirstFlrSF,
+                    BsmtQual,
+                    Fireplaces
+                );
+                validButton = '';
+            } catch (error) {
+                console.error('Error fetching price:', error);
+                validButton = 'An error occurred while processing.';
+            }
+        } else {
+            validButton = 'Please fill in all fields';
         }
 
-        try {
-            price = await priceRepository.getPrice(
-                OverallQual,
-                GarageCars,
-                ExterQual,
-                GrLivArea,
-                FullBath,
-                KitchenQual,
-                YearBuilt,
-                FirstFlrSF,
-                BsmtQual,
-                Fireplaces
-            );
-            console.log('Predicted Price:', price);
-        } catch (error) {
-            console.error('Error fetching price:', error);
-        }
-    }
+        loading = false;
+    };
 </script>
 
-/**
-* TODO: Add better validation and display error messages
-*/
-
-<div id="program" class="program-component">
+<div id="program" class="program-component {loading ? 'loading' : ''}">
     <div class="form-container">
         <div>
             <div class="form-header">
@@ -78,27 +100,32 @@
         <div class="form-wrapper">
             <Dropdown title="Overall Quality"
                       options={['Very Excellent', 'Excellent', 'Very Good', 'Good', 'Above Average', 'Average', 'Below Average', 'Fair', 'Poor', 'Very Poor']}
-                      bind:selectedOption={OverallQual}/>
+                      bind:selectedOption={OverallQual} validate={validateSelection}/>
             <Input title="Car capacity in garage" placeholder="e.g. 2" bind:value={GarageCars}
                    validate={validate}/>
             <Dropdown title="External Quality" options={['Excellent', 'Good', 'Average/Typical', 'Fair', 'Poor']}
-                      bind:selectedOption={ExterQual}/>
+                      bind:selectedOption={ExterQual} validate={validateSelection}/>
             <Input title="Above ground sq. ft." placeholder="e.g. 2400" bind:value={GrLivArea}
                    validate={validate}/>
             <Input title="Number of bathrooms" placeholder="e.g. 1" bind:value={FullBath}
                    validate={validate}/>
             <Dropdown title="Kitchen quality" options={['Excellent', 'Good', 'Average/Typical', 'Fair', 'Poor']}
-                      bind:selectedOption={KitchenQual}/>
+                      bind:selectedOption={KitchenQual} validate={validateSelection}/>
             <Input title="Year the House Was Built" placeholder="e.g. 2002" bind:value={YearBuilt}
                    validate={validateYear}/>
             <Input title="First Floor square feet" placeholder="e.g. 4000" bind:value={FirstFlrSF}
                    validate={validate}/>
             <Dropdown title="Basement quality" options={['Excellent', 'Good', 'Typical', 'Fair', 'Poor','No Basement']}
-                      bind:selectedOption={BsmtQual}/>
+                      bind:selectedOption={BsmtQual} validate={validateSelection}/>
             <Input title="Number of fireplaces" placeholder="e.g. 1" bind:value={Fireplaces}
                    validate={validate}/>
         </div>
-        <Button type="form" on:click={submitForm}>Submit</Button>
+        <Button type="form" on:click={submitForm} disabled={loading}>
+            Submit
+        </Button>
+        <div class="error-wrapper">
+            {validButton || "\u00A0"}
+        </div>
     </div>
 </div>
 
@@ -108,6 +135,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    &.loading {
+      cursor: wait;
+    }
 
     .form-header {
       font-size: 4.5rem;
@@ -141,7 +172,5 @@
     .program-component .form-description {
       font-size: 1rem !important;
     }
-
-
   }
 </style>

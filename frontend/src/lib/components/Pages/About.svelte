@@ -6,14 +6,14 @@
     <div class="left-section">
         <div class="header">How it works?</div>
         <div class="text">The HouseWise estimator predicts house prices using a <span>machine learning model</span>
-            trained on
-            property data such as area, number of bedrooms, bathrooms, floors, year built, location, condition, garage,
-            and
-            price.
+            trained on property data such as garage capacity, overall quality, number of bathrooms, external quality,
+            year built, square feet radius, basement quality, number of bedrooms, number of fireplaces, and kitchen
+            quality.
         </div>
-        <div class="text">The model utilizes the<span>RandomForestRegressor</span>, machine learning algorithm
+        <div class="text">The model utilizes the <span>RandomForestRegressor</span>, machine learning algorithm
             based on an ensemble of decision trees. The model works by constructing multiple decision trees during
-            training and combining their outputs to refine price predictions. Additionally it reduces the risk of overfitting
+            training and combining their outputs to refine price predictions. Additionally it reduces the risk of
+            overfitting
             compared to a single decision tree.
         </div>
         <div class="text">When users input details about a house, the estimator analyzes the data and predicts the
