@@ -20,10 +20,10 @@ HouseWise Estimator is a web application that predicts house prices using a mach
 - SCSS
 
 ## Installation
-1. Clone the repository:
-    ```sh
-    git clone https://github.com/Miikolaj/HouseWise.git
-    ```
+Clone the repository:
+```sh
+git clone https://github.com/Miikolaj/HouseWise.git
+```
 
 ## Start the Project
 
