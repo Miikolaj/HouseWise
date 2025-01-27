@@ -27,10 +27,13 @@ Push-Location -Path "./backend"
 Write-Host "Installing Python dependencies..."
 pip install -r requirements.txt
 
+Push-Location -Path "./fastApiProject"
+
 # Run the FastAPI server
 Write-Host "Starting the FastAPI backend on 127.0.0.1:8000..."
 Start-Process -NoNewWindow -FilePath "python" -ArgumentList "-m uvicorn main:app --host 127.0.0.1 --port 8000"
 
+Pop-Location
 Pop-Location
 
 # Start the frontend

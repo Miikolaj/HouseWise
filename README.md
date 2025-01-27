@@ -33,39 +33,7 @@ To start the entire project, run the following command in your terminal:
 ./start-project.ps1
 ```
 
-### Only Backend
 
-1. Install the required packages:
-    ```sh
-    pip install -r requirements.txt
-    ```
-
-2. Train the model and save the pipeline:
-    ```sh
-    python ../python/model_training.py
-    ```
-
-3. Start the FastAPI server:
-    ```sh
-    python.exe -m uvicorn main:app --reload
-    ```
-
-### Only Frontend
-
-1. Navigate to the frontend directory:
-    ```sh
-    cd ../../frontend
-    ```
-
-2. Install the required packages:
-    ```sh
-    npm install
-    ```
-
-3. Start the development server:
-    ```sh
-    npm run dev
-    ```
 
 ## Usage
 
@@ -89,10 +57,6 @@ The input data should include the following features:
 - `Fireplaces`: Number of fireplaces
 
 ## API Endpoints
-
-### `GET /`
-
-Returns a welcome message.
 
 ### `POST /predict`
 

@@ -9,8 +9,8 @@ import pickle
 import pandas as pd
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from backend.fastApiProject.schemas.schema import Item
-from backend.fastApiProject.mappings.mapping import (
+from schemas.schema import Item
+from mappings.mapping import (
     EXTER_QUAL_MAP,
     OVERALL_QUAL_MAP,
     KITCHEN_QUAL_MAP,
