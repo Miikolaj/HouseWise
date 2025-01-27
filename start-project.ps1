@@ -21,7 +21,7 @@ if (-Not (Get-Command pip -ErrorAction SilentlyContinue)) {
 
 # Start the backend
 Write-Host "Setting up the Python backend..."
-Push-Location -Path "./backend/fastApiProject"
+Push-Location -Path "./backend"
 
 # Check and install Python dependencies
 Write-Host "Installing Python dependencies..."

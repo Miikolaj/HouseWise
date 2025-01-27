@@ -12,7 +12,6 @@ import pandas as pd
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 from sklearn.impute import SimpleImputer
-from sklearn.ensemble import RandomForestRegressor
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
@@ -62,7 +61,7 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 # Save the pipeline to a file
-OUTPUT_PATH = '../backend/fastApiProject/'
+OUTPUT_PATH = '../fastApiProject/models/'
 os.makedirs(OUTPUT_PATH, exist_ok=True)
 model_file = os.path.join(OUTPUT_PATH, 'model.pkl')
 

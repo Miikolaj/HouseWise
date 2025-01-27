@@ -25,11 +25,6 @@ HouseWise Estimator is a web application that predicts house prices using a mach
     git clone https://github.com/Miikolaj/HouseWise.git
     ```
 
-2. Create a virtual environment and activate it:
-    ```sh
-    python -m venv venv
-    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
-    ```
 ## Start the Project
 
 To start the entire project, run the following command in your terminal:
@@ -52,7 +47,7 @@ To start the entire project, run the following command in your terminal:
 
 3. Start the FastAPI server:
     ```sh
-    uvicorn main:app --reload
+    python.exe -m uvicorn main:app --reload
     ```
 
 ### Only Frontend

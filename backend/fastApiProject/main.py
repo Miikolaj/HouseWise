@@ -9,8 +9,8 @@ import pickle
 import pandas as pd
 from fastapi import FastAPI
 from starlette.middleware.cors import CORSMiddleware
-from schemas import Item
-from mappings import (
+from backend.fastApiProject.schemas.schema import Item
+from backend.fastApiProject.mappings.mapping import (
     EXTER_QUAL_MAP,
     OVERALL_QUAL_MAP,
     KITCHEN_QUAL_MAP,
@@ -46,7 +46,7 @@ async def prediction(data: Item):
     """
     # Load the trained pipeline
     try:
-        with open("model.pkl", "rb") as file:
+        with open("models/model.pkl", "rb") as file:
             model_pipeline = pickle.load(file)
     except FileNotFoundError:
         return {"error": "Model file not found. Ensure 'model.pkl' is available."}
