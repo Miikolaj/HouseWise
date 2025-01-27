@@ -1,3 +1,11 @@
+"""
+Module: model_training
+
+This module is responsible for training a Random Forest Regressor pipeline.
+It includes preprocessing steps for numerical and categorical data, evaluates the model,
+and saves the trained pipeline for deployment.
+"""
+
 import os
 import pickle
 import pandas as pd
@@ -54,9 +62,9 @@ model.fit(X_train, y_train)
 y_pred = model.predict(X_test)
 
 # Save the pipeline to a file
-output_path = '../backend/fastApiProject/'
-os.makedirs(output_path, exist_ok=True)
-model_file = os.path.join(output_path, 'model.pkl')
+OUTPUT_PATH = '../backend/fastApiProject/'
+os.makedirs(OUTPUT_PATH, exist_ok=True)
+model_file = os.path.join(OUTPUT_PATH, 'model.pkl')
 
 with open(model_file, 'wb') as f:
     pickle.dump(model, f)
