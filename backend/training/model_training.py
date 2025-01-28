@@ -11,11 +11,11 @@ import pickle
 import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import train_test_split
+from sklearn.model_selection import train_test_split, cross_validate
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 from sklearn.compose import ColumnTransformer
-from sklearn.pipeline import Pipeline
+from sklearn.pipeline import Pipeline, make_pipeline
 import numpy as np
 
 # Load the dataset
@@ -48,14 +48,25 @@ preprocessor = ColumnTransformer(
     ]
 )
 
+exported_pipeline = make_pipeline(
+    StandardScaler(),
+    RandomForestRegressor(bootstrap=False, max_features=0.25, min_samples_leaf=1, min_samples_split=7, n_estimators=100, random_state=42)
+)
+
 # Create a pipeline with the preprocessor and model
 model = Pipeline(steps=[
     ('preprocessor', preprocessor),
-    ('model', RandomForestRegressor(random_state=42))
+    ('model', exported_pipeline)
 ])
 
 # Split data into train and test sets
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Perform cross-validation on the entire dataset
+cv_results = cross_validate(model, X, y, cv=5, scoring='neg_mean_squared_error', return_train_score=False)
+
+# Calculate average cross-validation scores
+mean_cv_rmse = np.mean(np.sqrt(-cv_results['test_score']))
 
 # Fit the pipeline on training data
 model.fit(X_train, y_train)
@@ -70,7 +81,6 @@ with open(model_file, 'wb') as f:
     pickle.dump(model, f)
 
 print("Number of features expected:", model.n_features_in_)
-
 print("Pipeline saved to:", model_file)
 
 # Evaluate the model
@@ -84,7 +94,8 @@ evaluation_results = {
     "MAE": mae,
     "MSE": mse,
     "RMSE": rmse,
-    "R2": r2
+    "R2": r2,
+    "CV Mean RMSE": mean_cv_rmse
 }
 
 print(evaluation_results)
