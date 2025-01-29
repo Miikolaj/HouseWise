@@ -18,6 +18,8 @@
     display: inline-flex;
     justify-content: center;
     align-items: center;
+
+
   }
 
   .estimate {
@@ -33,6 +35,10 @@
       background: lighten($primary, 10%);
       transform: translatey(-5px);
       box-shadow: 0 15px 30px rgba(66, 32, 133, 0.6);
+    }
+
+    &:active {
+      transform: translateY(3px);
     }
 
     &:focus {
@@ -57,6 +63,10 @@
     &:hover:not(:disabled) {
       background: lighten($primary, 10%);
       box-shadow: 0 0 25px 10px rgba(66, 32, 133, 0.6);
+    }
+
+    &:active {
+      transform: translateY(3px);
     }
 
     &:focus {
